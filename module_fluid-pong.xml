@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_fluid-pong" default="compile.module.fluid-pong">
+  <dirname property="module.fluid-pong.basedir" file="${ant.file.module_fluid-pong}"/>
+  
+  <property name="module.jdk.home.fluid-pong" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.fluid-pong" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.fluid-pong" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.fluid-pong" value="${compiler.args}"/>
+  
+  <property name="fluid-pong.output.dir" value="${module.fluid-pong.basedir}/out/production/fluid-pong"/>
+  <property name="fluid-pong.testoutput.dir" value="${module.fluid-pong.basedir}/out/test/fluid-pong"/>
+  
+  <path id="fluid-pong.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="fluid-pong.module.production.classpath">
+    <path refid="${module.jdk.classpath.fluid-pong}"/>
+    <path refid="library.scala-library-2.8.1_(1).classpath"/>
+    <path refid="library.processing-core.classpath"/>
+    <path refid="library.processing-opengl.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="fluid-pong.runtime.production.module.classpath">
+    <pathelement location="${fluid-pong.output.dir}"/>
+    <path refid="library.scala-library-2.8.1_(1).classpath"/>
+    <path refid="library.processing-core.classpath"/>
+    <path refid="library.processing-opengl.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="fluid-pong.module.classpath">
+    <path refid="${module.jdk.classpath.fluid-pong}"/>
+    <pathelement location="${fluid-pong.output.dir}"/>
+    <path refid="library.scala-library-2.8.1_(1).classpath"/>
+    <path refid="library.processing-core.classpath"/>
+    <path refid="library.processing-opengl.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="fluid-pong.runtime.module.classpath">
+    <pathelement location="${fluid-pong.testoutput.dir}"/>
+    <pathelement location="${fluid-pong.output.dir}"/>
+    <path refid="library.scala-library-2.8.1_(1).classpath"/>
+    <path refid="library.processing-core.classpath"/>
+    <path refid="library.processing-opengl.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.fluid-pong">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.fluid-pong">
+    <patternset refid="excluded.from.module.fluid-pong"/>
+  </patternset>
+  
+  <path id="fluid-pong.module.sourcepath">
+    <dirset dir="${module.fluid-pong.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.fluid-pong" depends="compile.module.fluid-pong.production,compile.module.fluid-pong.tests" description="Compile module fluid-pong"/>
+  
+  <target name="compile.module.fluid-pong.production" depends="register.custom.compilers" description="Compile module fluid-pong; production classes">
+    <mkdir dir="${fluid-pong.output.dir}"/>
+    <javac2 destdir="${fluid-pong.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.fluid-pong}/javac">
+      <compilerarg line="${compiler.args.fluid-pong}"/>
+      <bootclasspath refid="fluid-pong.module.bootclasspath"/>
+      <classpath refid="fluid-pong.module.production.classpath"/>
+      <src refid="fluid-pong.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.fluid-pong"/>
+    </javac2>
+    
+    <copy todir="${fluid-pong.output.dir}">
+      <fileset dir="${module.fluid-pong.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.fluid-pong.tests" depends="register.custom.compilers,compile.module.fluid-pong.production" description="compile module fluid-pong; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.fluid-pong" description="cleanup module">
+    <delete dir="${fluid-pong.output.dir}"/>
+    <delete dir="${fluid-pong.testoutput.dir}"/>
+  </target>
+</project>

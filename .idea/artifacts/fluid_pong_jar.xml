@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact name="fluid-pong:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fluid_pong_jar</output-path>
+    <root id="root">
+      <element id="archive" name="fluid_pong.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="fluid-pong" />
+      </element>
+      <element id="library" level="project" name="processing-opengl" />
+      <element id="library" level="project" name="processing-core" />
+      <element id="library" level="application" name="scala-library-2.8.1 (1)" />
+      <element id="library" level="project" name="lib" />
+    </root>
+  </artifact>
+</component>

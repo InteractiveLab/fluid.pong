@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: gluegen-rt.jar jogl.jar opengl.jar core.jar scala-library.
+ jar scala-swing.jar scala-dbc.jar libTUIO.jar MSAFluid.jar TUIO.jar j
+ box2d-library-2.1.2-alpha.jar slf4j-api-1.6.1.jar slf4j-simple-1.6.1.
+ jar
+Main-Class: pong.Pong
+
